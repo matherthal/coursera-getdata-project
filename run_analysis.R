@@ -60,32 +60,7 @@ selectedCols <- c(1, 2, 3, 4, 5, 6,
 	452, 453, 454, 503, 504,
 	513, 516, 517, 526, 529, 530,
 	539, 542, 552)
-
-selectedCols <- c(1, 2, 3, 4, 5, 6,
-	41, 42, 43, 44, 45, 46,
-	81, 82, 83, 84, 85, 86,
-	121, 122, 123, 124, 125, 126,
-	161, 162, 163, 164, 165, 166,
-	201, 202, 214, 215, 227, 228, 
-	240, 241, 253, 254, 
-	266, 267, 268, 269, 270, 271,
-	294, 295, 296, 
-	345, 346, 347, 348, 349, 350, 
-	373, 374, 375,
-	424, 425, 426, 427, 428, 429,
-	452, 453, 454, 503, 504,
-	513, 516, 517, 526, 529, 530,
-	539, 542, 552)
 x_meas <- x_meas[,selectedCols]
-
-
-##Step 1 - Merges the training and the test sets to create one data set.
-##Below the step 1 is finished, since the data sets are merged into "data"
-
-##Join together the measurements and the subjects
-data <- x_meas
-data$activity <- y_meas
-data$subject <- sbjs
 
 
 ##Step 3 - Uses descriptive activity names to name the activities in the 
@@ -103,16 +78,17 @@ nameActivity <- function(x) {
 		x)
 }
 
-##Convert activity codes into activity names
-##activity <-data$activity 
-##activity$activity <- sapply(activity$activity, nameActivity)
-##Convert activity names to factor
-##activity$activity <- as.factor(activity$activity)
-##data$activity <- activity$activity
 
 ##Convert activity codes into activity names
 activity<-sapply(y_meas$activity, nameActivity)
 activity <- data.frame(activity)
+
+
+##Step 1 - Merges the training and the test sets to create one data set.
+##Below the step 1 is finished, since the data sets are merged into "data"
+
+##Join together the measurements, the activities and the subjects
+data <- x_meas
 data <- cbind(data, activity)
 data <- cbind(data, sbjs)
 
